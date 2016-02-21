@@ -7,14 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA50C44D1C19B0830045DA83 /* tableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA50C44C1C19B0830045DA83 /* tableView.swift */; };
+		FA50C4711C1A2CC80045DA83 /* MyCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA50C4701C1A2CC80045DA83 /* MyCustomCell.swift */; };
+		FA96D36D1C2C3D0700669910 /* menu_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FA96D3691C2C3D0700669910 /* menu_icon.png */; };
 		FAA2D4141C090C2D00E8362C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA2D4131C090C2D00E8362C /* AppDelegate.swift */; };
 		FAA2D4161C090C2D00E8362C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA2D4151C090C2D00E8362C /* ViewController.swift */; };
-		FAA2D4191C090C2D00E8362C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAA2D4171C090C2D00E8362C /* Main.storyboard */; };
+		FAA2D4191C090C2D00E8362C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAA2D4171C090C2D00E8362C /* Main.storyboard */; settings = {ASSET_TAGS = (aylikOdemeView, ); }; };
 		FAA2D41B1C090C2D00E8362C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAA2D41A1C090C2D00E8362C /* Assets.xcassets */; };
 		FAA2D41E1C090C2D00E8362C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAA2D41C1C090C2D00E8362C /* LaunchScreen.storyboard */; };
+		FAB66E381C2C51B2003C37C7 /* money309_yesil.png in Resources */ = {isa = PBXBuildFile; fileRef = FAB66E351C2C51B2003C37C7 /* money309_yesil.png */; };
+		FAB66E391C2C51B2003C37C7 /* share_yesil.png in Resources */ = {isa = PBXBuildFile; fileRef = FAB66E361C2C51B2003C37C7 /* share_yesil.png */; };
+		FAB66E3A1C2C51B2003C37C7 /* time12_yesil.png in Resources */ = {isa = PBXBuildFile; fileRef = FAB66E371C2C51B2003C37C7 /* time12_yesil.png */; };
+		FAB66E3C1C2C57CE003C37C7 /* rate.png in Resources */ = {isa = PBXBuildFile; fileRef = FAB66E3B1C2C57CE003C37C7 /* rate.png */; };
+		FAB66E3F1C2C73AC003C37C7 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = FAB66E3D1C2C73AC003C37C7 /* add.png */; };
+		FAB66E401C2C73AC003C37C7 /* calculate.png in Resources */ = {isa = PBXBuildFile; fileRef = FAB66E3E1C2C73AC003C37C7 /* calculate.png */; };
+		FAB66E421C2C7688003C37C7 /* share1.png in Resources */ = {isa = PBXBuildFile; fileRef = FAB66E411C2C7688003C37C7 /* share1.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA50C44C1C19B0830045DA83 /* tableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tableView.swift; sourceTree = "<group>"; };
+		FA50C4701C1A2CC80045DA83 /* MyCustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyCustomCell.swift; path = ../MyCustomCell.swift; sourceTree = "<group>"; };
+		FA96D3691C2C3D0700669910 /* menu_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_icon.png; sourceTree = "<group>"; };
 		FAA2D4101C090C2D00E8362C /* krediHesaplama.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = krediHesaplama.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA2D4131C090C2D00E8362C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAA2D4151C090C2D00E8362C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +35,13 @@
 		FAA2D41A1C090C2D00E8362C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAA2D41D1C090C2D00E8362C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FAA2D41F1C090C2D00E8362C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FAB66E351C2C51B2003C37C7 /* money309_yesil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = money309_yesil.png; sourceTree = "<group>"; };
+		FAB66E361C2C51B2003C37C7 /* share_yesil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share_yesil.png; sourceTree = "<group>"; };
+		FAB66E371C2C51B2003C37C7 /* time12_yesil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = time12_yesil.png; sourceTree = "<group>"; };
+		FAB66E3B1C2C57CE003C37C7 /* rate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rate.png; sourceTree = "<group>"; };
+		FAB66E3D1C2C73AC003C37C7 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
+		FAB66E3E1C2C73AC003C37C7 /* calculate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calculate.png; sourceTree = "<group>"; };
+		FAB66E411C2C7688003C37C7 /* share1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share1.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +55,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA96D3681C2C3CF100669910 /* img */ = {
+			isa = PBXGroup;
+			children = (
+				FA96D3691C2C3D0700669910 /* menu_icon.png */,
+				FAB66E351C2C51B2003C37C7 /* money309_yesil.png */,
+				FAB66E3B1C2C57CE003C37C7 /* rate.png */,
+				FAB66E3D1C2C73AC003C37C7 /* add.png */,
+				FAB66E411C2C7688003C37C7 /* share1.png */,
+				FAB66E3E1C2C73AC003C37C7 /* calculate.png */,
+				FAB66E361C2C51B2003C37C7 /* share_yesil.png */,
+				FAB66E371C2C51B2003C37C7 /* time12_yesil.png */,
+			);
+			name = img;
+			sourceTree = "<group>";
+		};
 		FAA2D4071C090C2D00E8362C = {
 			isa = PBXGroup;
 			children = (
@@ -54,12 +89,15 @@
 		FAA2D4121C090C2D00E8362C /* krediHesaplama */ = {
 			isa = PBXGroup;
 			children = (
+				FA96D3681C2C3CF100669910 /* img */,
+				FA50C4701C1A2CC80045DA83 /* MyCustomCell.swift */,
 				FAA2D4131C090C2D00E8362C /* AppDelegate.swift */,
 				FAA2D4151C090C2D00E8362C /* ViewController.swift */,
 				FAA2D4171C090C2D00E8362C /* Main.storyboard */,
 				FAA2D41A1C090C2D00E8362C /* Assets.xcassets */,
 				FAA2D41C1C090C2D00E8362C /* LaunchScreen.storyboard */,
 				FAA2D41F1C090C2D00E8362C /* Info.plist */,
+				FA50C44C1C19B0830045DA83 /* tableView.swift */,
 			);
 			path = krediHesaplama;
 			sourceTree = "<group>";
@@ -90,12 +128,16 @@
 		FAA2D4081C090C2D00E8362C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					aylikOdemeView,
+				);
 				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = befree;
 				TargetAttributes = {
 					FAA2D40F1C090C2D00E8362C = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = 9789KVU745;
 					};
 				};
 			};
@@ -122,9 +164,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAB66E3F1C2C73AC003C37C7 /* add.png in Resources */,
+				FAB66E3A1C2C51B2003C37C7 /* time12_yesil.png in Resources */,
+				FAB66E401C2C73AC003C37C7 /* calculate.png in Resources */,
+				FAB66E391C2C51B2003C37C7 /* share_yesil.png in Resources */,
+				FA96D36D1C2C3D0700669910 /* menu_icon.png in Resources */,
 				FAA2D41E1C090C2D00E8362C /* LaunchScreen.storyboard in Resources */,
+				FAB66E381C2C51B2003C37C7 /* money309_yesil.png in Resources */,
+				FAB66E421C2C7688003C37C7 /* share1.png in Resources */,
 				FAA2D41B1C090C2D00E8362C /* Assets.xcassets in Resources */,
 				FAA2D4191C090C2D00E8362C /* Main.storyboard in Resources */,
+				FAB66E3C1C2C57CE003C37C7 /* rate.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +187,8 @@
 			files = (
 				FAA2D4161C090C2D00E8362C /* ViewController.swift in Sources */,
 				FAA2D4141C090C2D00E8362C /* AppDelegate.swift in Sources */,
+				FA50C4711C1A2CC80045DA83 /* MyCustomCell.swift in Sources */,
+				FA50C44D1C19B0830045DA83 /* tableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,10 +299,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = krediHesaplama/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = freedom.krediHesaplama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -258,10 +315,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = krediHesaplama/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = freedom.krediHesaplama;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -284,6 +346,7 @@
 				FAA2D4241C090C2D00E8362C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
