@@ -11,7 +11,10 @@ import UIKit
 var compareArr = [String]()
 var bankaFaizOran = [[String]]()
 
+// --------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------
 // excel formul hesaplamaları için internetten bulduğum class
+// --------------------------------------------------------------------------------
 class ExcelFormulas {
     class func pmt(rate : Double, nper : Double, pv : Double, fv : Double = 0, type : Double = 0) -> Double {
         return ((-pv * pvif(rate, nper: nper) - fv) / ((1.0 + rate * type) * fvifa(rate, nper: nper)))
@@ -59,63 +62,92 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     var pmt = Double()
     var krediTipiValue = 0 //defualt value 0 = Taşıt , 1 = Ev , 2 = İhtiyaç
 
+    // --------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------
+    // kredi tipi değiştirildiğinde oranlar değişeceği için ilgili alanlar temizlenir
+    // --------------------------------------------------------------------------------
+    @IBAction func krediTipiDegitir(sender: AnyObject) {
+        oran.text = ""
+        taksitTutarıText.text = ""
+        toplamGeriOdemeText.text = ""
+        faizFarkiText.text = ""
+    }
+    
+
+    
+    // --------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------
+    // tutar vade ve oran giridiğinde otomatik hesaplama yapılır
+    // --------------------------------------------------------------------------------
+    
     @IBAction func otomatikHesapla(sender: AnyObject) {
         
+        
+        oranListe.hidden = true     // klavye ile giriş yapılırken seceneklerin kaybolması için
+        pickerAy.hidden = true
    
-          
-        let krediT      = Int (KrediTutari.text!)
+        // degerlerin int yada double kontrolünün yapılabilmesi için ilk adım
+       
+        let krediT      = Int(KrediTutari.text!.stringByReplacingOccurrencesOfString(".", withString: "")) //
         let vadeSayisi  = Int (vade.text!)
         let oranDegeri  = Double (oran.text!)
             
         print("kreditutarı \(krediT) vadesayısı \(vadeSayisi) oran \(oranDegeri)")
             
-        if krediT != nil && vadeSayisi != nil && oranDegeri != nil  {
+        if krediT < 9999999 && krediT != nil && vadeSayisi != nil && oranDegeri != nil  {
             
             if ( bireyselTicari.selectedSegmentIndex == 0 ) {
                 // bireysel
-                pmt = ExcelFormulas.pmt( Double(oran.text!)! * 0.0012, nper: Double(vade.text!)!, pv: Double(KrediTutari.text!.stringByReplacingOccurrencesOfString(".", withString: ""))!)
+                pmt = ExcelFormulas.pmt( Double(oran.text!)! * 0.0012, nper: Double(vade.text!)!, pv: Double(krediT!))
+                
             } else {
                 // ticari
-                pmt = ExcelFormulas.pmt( Double(oran.text!)! * 0.00105, nper: Double(vade.text!)!, pv: Double(KrediTutari.text!)!)
+                pmt = ExcelFormulas.pmt( Double(oran.text!)! * 0.00105, nper: Double(vade.text!)!, pv: Double(krediT!))
             }
             
             taksitTutarıText.text = NSString(format: "%.0f", pmt*(-1)) as String + "  TL"
             toplamGeriOdemeText.text = NSString(format: "%.0f", pmt * (-1) * Double(vade.text!)!) as String + "  TL"
             faizFarkiText.text = NSString(format: "%.0f", pmt * (-1) * Double(vade.text!)! - Double(KrediTutari.text!)!) as String + "  TL"
             addToCompareButtonOutlet.alpha = 1
-            
+    
             
          } else {
             print("int değil ")
          }
-
+        
+        if krediT != nil {
+            let formatter = NSNumberFormatter()
+            formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+            formatter.locale = NSLocale(localeIdentifier: "en_TR")
+            KrediTutari.text = String( UTF8String: formatter.stringFromNumber(krediT!)!)
+        }
+        
     }
     
-    @IBAction func oranDegisimi(sender: AnyObject) {
-    }
 
-    @IBAction func tutarDegisimi(sender: AnyObject) {
-        print(KrediTutari.text)
-    }
     
-
+    // tutar girişi için dokunulduğunda alan temizlenir
+    
     @IBAction func TutarGirisTikla(sender: AnyObject) {
         
         KrediTutari.text=""
     }
     
 
+    // taşıt/ev/ihtiyaç değiştirildiğinde oranlar picker a yeniden yazılır.
+    
     @IBAction func krediTipiChanged(sender: AnyObject) {
         
         print (String(krediTipi.selectedSegmentIndex))
         
         krediTipiValue = krediTipi.selectedSegmentIndex
-        oranListe.reloadAllComponents()                         // reload rate value depend on rate-type
-        
+        oranListe.reloadAllComponents()
         
     }
-    
-    // --------------- hata ekran fonksiyonu ----------------------------
+    // --------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------
+    // --------------- hata ekran fonksiyonu ------------------------------------------
+    // --------------------------------------------------------------------------------
     func errScreen(str : String){
         
         let alert = UIAlertController(title: "Error", message: str, preferredStyle: UIAlertControllerStyle.Alert)
@@ -127,7 +159,10 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         self.presentViewController(alert, animated: true, completion: nil)
         
     }
-    // --------------- pickerview settings ----------------------------
+    // --------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------
+    // --------------- pickerview settings --------------------------------------------
+    // --------------------------------------------------------------------------------
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
@@ -183,11 +218,11 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         
     }
 
-    //---------------------------------------------------
-    
-    
-    
-    @IBAction func vadeTouch(sender: AnyObject) {   // textfield a dokunduğunda picker yavaşça belirir
+    // --------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------
+    // vade alanına dokunduğunda picker yavaşça belirir
+    // --------------------------------------------------------------------------------
+    @IBAction func vadeTouch(sender: AnyObject) {
         vade.text=""
         self.pickerAy.alpha = 0
         pickerAy.hidden=false
@@ -198,8 +233,11 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         })
     }
 
-   
-    @IBAction func oranTouched(sender: AnyObject) {  // textfield a dokunduğunda picker yavaşça belirir
+    // --------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------
+    // oran alanına dokunduğunda picker yavaşça belirir
+    // --------------------------------------------------------------------------------
+    @IBAction func oranTouched(sender: AnyObject) {
         oran.text=""
         self.oranListe.alpha = 0
         self.oranListe.reloadAllComponents()
@@ -212,25 +250,10 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
             })
         }
         if bankaFaizOran.count == 0 {
-            errScreen("hata :banka faiz oranları çekilemedi lütfen elle giriş yapınız")
-            oran.text="2"
+            errScreen("Hata : Banka faiz oranları çekilemedi lütfen elle giriş yapınız")
+            oran.text="1.01"
         }
     }
-
-    
-    //connections inspector den bağlantı silindi. "kredi tutari" ile baglanabilir. fakat fonksiyon çalışırken . ekliyor ve hesaplamada bu "," gibi algılanarak tutarı düşük gösteriyor. "." yerine "," konularak deneme yapılabilir. 
-    
-    @IBAction func formatKT(sender: AnyObject) {
-        // kredi tutarı  girilirken 1000 lik şekinde ayırmak için
-        
-        let formatter = NSNumberFormatter()
-        formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-        formatter.locale = NSLocale(localeIdentifier: "en_TR")
-        if KrediTutari.text != "" {
-            KrediTutari.text =  String( UTF8String: formatter.stringFromNumber(Int(KrediTutari.text!.stringByReplacingOccurrencesOfString(".", withString: ""))!)!)!
-        }
-    }
-
 
     
     @IBAction func addCompareButton(sender: AnyObject) {
@@ -263,30 +286,6 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         }
     }
     
-    @IBAction func hesaplaButton(sender: AnyObject) {
-        
-        if ( Double(KrediTutari.text!) != nil && Double(vade.text!) != nil && Double(oran.text!) != nil){  // kredi tutarı, vade , oran girilmiş olmalı
-        
-
-            if ( bireyselTicari.selectedSegmentIndex == 0 ) {
-                // bireysel
-                pmt = ExcelFormulas.pmt( Double(oran.text!)! * 0.0012, nper: Double(vade.text!)!, pv: Double(KrediTutari.text!.stringByReplacingOccurrencesOfString(".", withString: ""))!)
-            } else {
-                // ticari
-                pmt = ExcelFormulas.pmt( Double(oran.text!)! * 0.00105, nper: Double(vade.text!)!, pv: Double(KrediTutari.text!)!)
-            }
-        
-        
-            taksitTutarıText.text = NSString(format: "%.0f", pmt*(-1)) as String + "  TL"
-            toplamGeriOdemeText.text = NSString(format: "%.0f", pmt * (-1) * Double(vade.text!)!) as String + "  TL"
-            faizFarkiText.text = NSString(format: "%.0f", pmt * (-1) * Double(vade.text!)! - Double(KrediTutari.text!)!) as String + "  TL"
-            addToCompareButtonOutlet.alpha = 1
-            
-        } else {
-            errScreen("Tutar,Vade ve Oran bilgilerini giriniz!")
-        }
-        
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -399,9 +398,12 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        // Dispose of any resources that can berecreated.
     }
     
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
    
     ///////////////////  text field içinden cıkarkan keyboard un yok olması için //////////////
     //////////////////////////////////////////////////////////////////////////////////////////
