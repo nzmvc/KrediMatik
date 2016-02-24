@@ -334,6 +334,12 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         // ornek data
         // Garanti Bankası:1.01:1.02:1.03;;;Finansbank:1.04:1.05:1.06;;;İşbankası:1.07:1.08:1.09
         
+        
+        //  http://ba.nazimavci.com/kredihesaplama/ws_krediHesap.php
+        // ornek data   JSON
+        //  [{"bankaAdi":null,"araba":"1.33","ev":"1.35","ihtiyac":"1.37","tarih":"2016-02-23"},{"bankaAdi":"Is Bankas?","araba":"1.38","ev":"1.39","ihtiyac":"1.32","tarih":"2016-02-23"},{"bankaAdi":"Yap\u0131 Kredi","araba":"1.39","ev":"1.4","ihtiyac":"1.41","tarih":"2016-02-23"},{"bankaAdi":null,"araba":"1.1","ev":"0","ihtiyac":"0","tarih":"2016-02-23"}]
+        
+        
         if let url = attemptedUrl {
             let task = NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) -> Void in
                 if let urlContent = data {
