@@ -82,6 +82,11 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     
     @IBAction func otomatikHesapla(sender: AnyObject) {
         
+        let formatter = NSNumberFormatter()
+        formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        formatter.locale = NSLocale(localeIdentifier: "en_TR")
+        
+     
         
         oranListe.hidden = true     // klavye ile giriş yapılırken seceneklerin kaybolması için
         pickerAy.hidden = true
@@ -92,7 +97,7 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         let vadeSayisi  = Int (vade.text!)
         let oranDegeri  = Double (oran.text!)
             
-        print("kreditutarı \(krediT) vadesayısı \(vadeSayisi) oran \(oranDegeri)")
+        //print("KrediTutari.text \(KrediTutari.text) kreditutarı \(krediT) vadesayısı \(vadeSayisi) oran \(oranDegeri)")
             
         if krediT < 9999999 && krediT != nil && vadeSayisi != nil && oranDegeri != nil  {
             
@@ -105,9 +110,30 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
                 pmt = ExcelFormulas.pmt( Double(oran.text!)! * 0.00105, nper: Double(vade.text!)!, pv: Double(krediT!))
             }
             
+            let taksit = pmt * (-1)
+            let toplamgeriodeme = pmt * (-1) * Double(vade.text!)!
+            let fark = toplamgeriodeme - Double(krediT!)
+            
+            
+            
+            print("KrediTutari.text \(KrediTutari.text) kreditutarı \(krediT) vadesayısı \(vadeSayisi) oran \(oranDegeri) taksit :\(taksit) toplam geriodeme : \(toplamgeriodeme)   fark \(fark)")
+            
+            /*  cevirmede problem var !!!!!!!!!!!!!!!! 1200 TL yi 12000TL yapınca değişim
+            KrediTutari.text Optional("1200") kreditutarı Optional(1200) vadesayısı Optional(12) oran Optional(1.04) taksit :100.813054861437 toplam geriodeme : 1209.75665833724   fark 9.75665833723883
+            KrediTutari.text Optional("1.2000") kreditutarı Optional(12000) vadesayısı Optional(12) oran Optional(1.04) taksit :1008.13054861437 toplam geriodeme : 12097.5665833724   fark 12096.3665833724
+            */
+            
             taksitTutarıText.text = NSString(format: "%.0f", pmt*(-1)) as String + "  TL"
             toplamGeriOdemeText.text = NSString(format: "%.0f", pmt * (-1) * Double(vade.text!)!) as String + "  TL"
-            faizFarkiText.text = NSString(format: "%.0f", pmt * (-1) * Double(vade.text!)! - Double(KrediTutari.text!)!) as String + "  TL"
+            faizFarkiText.text = NSString(format: "%.0f", ((pmt * (-1) * Double(vade.text!)!) - (Double(krediT!))) ) as String + "  TL"
+      
+            //  cevrimlerde hata var
+            taksitTutarıText.text       = formatter.stringFromNumber(Int(pmt)*(-1))!
+            toplamGeriOdemeText.text    = formatter.stringFromNumber(Int(pmt)*(-1) * Int(vade.text!)!)!
+            faizFarkiText.text          = formatter.stringFromNumber(Int(pmt)*(-1) * Int(vade.text!)! - Int(krediT!))!
+
+            
+            
             addToCompareButtonOutlet.alpha = 1
     
             
@@ -116,9 +142,7 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
          }
         
         if krediT != nil {
-            let formatter = NSNumberFormatter()
-            formatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
-            formatter.locale = NSLocale(localeIdentifier: "en_TR")
+
             KrediTutari.text = String( UTF8String: formatter.stringFromNumber(krediT!)!)
         }
         
