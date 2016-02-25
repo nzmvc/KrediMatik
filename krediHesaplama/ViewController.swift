@@ -99,7 +99,7 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
             
         //print("KrediTutari.text \(KrediTutari.text) kreditutarı \(krediT) vadesayısı \(vadeSayisi) oran \(oranDegeri)")
             
-        if krediT < 9999999 && krediT != nil && vadeSayisi != nil && oranDegeri != nil  {
+        if krediT < 9999999 && krediT != nil && vadeSayisi != nil && oranDegeri != nil && oranDegeri != 0   && krediT != 0 && vadeSayisi != 0 {
             
             if ( bireyselTicari.selectedSegmentIndex == 0 ) {
                 // bireysel
@@ -210,7 +210,9 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         if pickerView.tag == 0 {
             return vadeData[row] + " ay"
         } else if pickerView.tag == 1 && bankaFaizOran.count > 0 {
-            return bankaFaizOran[row][0] + " " + bankaFaizOran[row][krediTipiValue+1] + " %"
+            if bankaFaizOran[row][krediTipiValue+1] != "0" {
+                return bankaFaizOran[row][0] + " " + bankaFaizOran[row][krediTipiValue+1] + " %"
+            }
         }
         
         return ""
@@ -352,8 +354,8 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         
         // get rate data from url
         //------------------------------------
-        let attemptedUrl = NSURL(string: "http://www.nazimavci.com/bankafaizleri.html")
-        
+        //let attemptedUrl = NSURL(string: "http://www.nazimavci.com/bankafaizleri.html")
+        let attemptedUrl = NSURL(string: "http://ba.nazimavci.com/kredihesaplama/ws_krediHesap2.php")
         // ornek data
         // Garanti Bankası:1.01:1.02:1.03;;;Finansbank:1.04:1.05:1.06;;;İşbankası:1.07:1.08:1.09
         
@@ -361,7 +363,8 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         //  http://ba.nazimavci.com/kredihesaplama/ws_krediHesap.php
         // ornek data   JSON
         //  [{"bankaAdi":null,"araba":"1.33","ev":"1.35","ihtiyac":"1.37","tarih":"2016-02-23"},{"bankaAdi":"Is Bankas?","araba":"1.38","ev":"1.39","ihtiyac":"1.32","tarih":"2016-02-23"},{"bankaAdi":"Yap\u0131 Kredi","araba":"1.39","ev":"1.4","ihtiyac":"1.41","tarih":"2016-02-23"},{"bankaAdi":null,"araba":"1.1","ev":"0","ihtiyac":"0","tarih":"2016-02-23"}]
-        
+        // http://ba.nazimavci.com/kredihesaplama/ws_krediHesap2.php
+        // KoÃ§finans:1.33:1.35:1.37;;;Is Bankasi:1.38:1.39:1.32;;;YapÄ± Kredi:1.39:1.4:1.41;;;ING:1.4:1.4:1.4;;;Akbank:1.2:1.2:1.2;;;Garanti:1.1:0:0
         
         if let url = attemptedUrl {
             let task = NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) -> Void in
