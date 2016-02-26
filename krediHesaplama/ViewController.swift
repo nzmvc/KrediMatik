@@ -103,11 +103,11 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
             
             if ( bireyselTicari.selectedSegmentIndex == 0 ) {
                 // bireysel
-                pmt = ExcelFormulas.pmt( Double(oran.text!)! * 0.0012, nper: Double(vade.text!)!, pv: Double(krediT!))
+                pmt = ExcelFormulas.pmt( Double(oran.text!)! * 0.012, nper: Double(vade.text!)!, pv: Double(krediT!))
                 
             } else {
                 // ticari
-                pmt = ExcelFormulas.pmt( Double(oran.text!)! * 0.00105, nper: Double(vade.text!)!, pv: Double(krediT!))
+                pmt = ExcelFormulas.pmt( Double(oran.text!)! * 0.0105, nper: Double(vade.text!)!, pv: Double(krediT!))
             }
             
             let taksit = pmt * (-1)
@@ -122,15 +122,15 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
             KrediTutari.text Optional("1200") kreditutarı Optional(1200) vadesayısı Optional(12) oran Optional(1.04) taksit :100.813054861437 toplam geriodeme : 1209.75665833724   fark 9.75665833723883
             KrediTutari.text Optional("1.2000") kreditutarı Optional(12000) vadesayısı Optional(12) oran Optional(1.04) taksit :1008.13054861437 toplam geriodeme : 12097.5665833724   fark 12096.3665833724
             */
-            
+            /*
             taksitTutarıText.text = NSString(format: "%.0f", pmt*(-1)) as String + "  TL"
             toplamGeriOdemeText.text = NSString(format: "%.0f", pmt * (-1) * Double(vade.text!)!) as String + "  TL"
             faizFarkiText.text = NSString(format: "%.0f", ((pmt * (-1) * Double(vade.text!)!) - (Double(krediT!))) ) as String + "  TL"
-      
+      */
             //  cevrimlerde hata var
-            taksitTutarıText.text       = formatter.stringFromNumber(Int(pmt)*(-1))!
-            toplamGeriOdemeText.text    = formatter.stringFromNumber(Int(pmt)*(-1) * Int(vade.text!)!)!
-            faizFarkiText.text          = formatter.stringFromNumber(Int(pmt)*(-1) * Int(vade.text!)! - Int(krediT!))!
+            taksitTutarıText.text       = formatter.stringFromNumber( pmt * (-1))!
+            toplamGeriOdemeText.text    = formatter.stringFromNumber( pmt * (-1) * Double(vade.text!)!)!
+            faizFarkiText.text          = formatter.stringFromNumber( pmt * (-1) * Double(vade.text!)! - Double(krediT!))!
 
             
             
