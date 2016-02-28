@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import GoogleMobileAds
+
 
 var compareArr = [String]()
 var bankaFaizOran = [[String]]()
@@ -41,6 +43,8 @@ class ExcelFormulas {
 
 class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelegate  {
 
+    
+    
     @IBOutlet weak var addToCompareButtonOutlet: UIButton!
     @IBOutlet weak var compareButtonOutlet: UIButton!
     @IBOutlet weak var oranListe: UIPickerView!
@@ -57,11 +61,14 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     @IBOutlet weak var addCompareOutlet: UIButton!
     @IBOutlet weak var compareOutlet: UIButton!
     
+    
+    var interstitial: GADInterstitial!
     var pickerData = ["6","12","18","24","36","48","60","120"] // vade listesi
     var vadeData = ["6","12","18","24","36","48","60","120"] // vade listesi
     var pmt = Double()
     var krediTipiValue = 0 //defualt value 0 = Taşıt , 1 = Ev , 2 = İhtiyaç
 
+    
     // --------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------
     // kredi tipi değiştirildiğinde oranlar değişeceği için ilgili alanlar temizlenir
@@ -293,6 +300,8 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
             compareButtonOutlet.alpha = 1
             compareButtonOutlet.titleLabel?.text=" Karşılaştır ( " + String(compareArr.count) + " )"
             
+            reklamGoster()
+            
         } else {
                 errScreen("Herhangi bir hesaplama yapılmamış !!")
         }
@@ -306,6 +315,8 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
             for satir in str {
                 print(satir)
             }
+            
+            reklamGoster()
         } else {
             errScreen("Karşılaştıma yapacak veri bulunmuyor!")
         
@@ -315,6 +326,19 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // --------------------------------------------------------------------------------
+        // --------------------------------------------------------------------------------
+        // kredi tipi değiştirildiğinde oranlar değişeceği için ilgili alanlar temizlenir
+        // --------------------------------------------------------------------------------
+        
+        self.interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        
+        let request = GADRequest()
+        // Requests test ads on test devices.
+        request.testDevices = ["2077ef9a63d2b398840261c8221a0c9b"]
+        self.interstitial.loadRequest(request)
+       
         
         // hide to chose list
         pickerAy.dataSource = self
@@ -423,6 +447,14 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         
     }
 
+    func reklamGoster() {
+        if self.interstitial.isReady {
+            self.interstitial.presentFromRootViewController(self)
+        }
+        // Rest of game over logic goes here.
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can berecreated.
@@ -432,6 +464,8 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         return false
     }
    
+    
+    
     ///////////////////  text field içinden cıkarkan keyboard un yok olması için //////////////
     //////////////////////////////////////////////////////////////////////////////////////////
     
