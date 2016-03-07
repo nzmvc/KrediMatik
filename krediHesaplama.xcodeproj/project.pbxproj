@@ -23,6 +23,7 @@
 		FAB66E3F1C2C73AC003C37C7 /* add.png in Resources */ = {isa = PBXBuildFile; fileRef = FAB66E3D1C2C73AC003C37C7 /* add.png */; };
 		FAB66E401C2C73AC003C37C7 /* calculate.png in Resources */ = {isa = PBXBuildFile; fileRef = FAB66E3E1C2C73AC003C37C7 /* calculate.png */; };
 		FAB66E421C2C7688003C37C7 /* share1.png in Resources */ = {isa = PBXBuildFile; fileRef = FAB66E411C2C7688003C37C7 /* share1.png */; };
+		FADEB42B1C8DBF9A0053F84A /* karsilastirmaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADEB42A1C8DBF9A0053F84A /* karsilastirmaViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		FAB66E3D1C2C73AC003C37C7 /* add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add.png; sourceTree = "<group>"; };
 		FAB66E3E1C2C73AC003C37C7 /* calculate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calculate.png; sourceTree = "<group>"; };
 		FAB66E411C2C7688003C37C7 /* share1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share1.png; sourceTree = "<group>"; };
+		FADEB42A1C8DBF9A0053F84A /* karsilastirmaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = karsilastirmaViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				FAA2D41C1C090C2D00E8362C /* LaunchScreen.storyboard */,
 				FAA2D41F1C090C2D00E8362C /* Info.plist */,
 				FA50C44C1C19B0830045DA83 /* tableView.swift */,
+				FADEB42A1C8DBF9A0053F84A /* karsilastirmaViewController.swift */,
 			);
 			path = krediHesaplama;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FADEB42B1C8DBF9A0053F84A /* karsilastirmaViewController.swift in Sources */,
 				FAA2D4161C090C2D00E8362C /* ViewController.swift in Sources */,
 				FAA2D4141C090C2D00E8362C /* AppDelegate.swift in Sources */,
 				FA50C4711C1A2CC80045DA83 /* MyCustomCell.swift in Sources */,

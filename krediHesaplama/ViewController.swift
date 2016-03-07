@@ -135,9 +135,9 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
             faizFarkiText.text = NSString(format: "%.0f", ((pmt * (-1) * Double(vade.text!)!) - (Double(krediT!))) ) as String + "  TL"
       */
             //  cevrimlerde hata var
-            taksitTutarıText.text       = formatter.stringFromNumber( pmt * (-1))!
-            toplamGeriOdemeText.text    = formatter.stringFromNumber( pmt * (-1) * Double(vade.text!)!)!
-            faizFarkiText.text          = formatter.stringFromNumber( pmt * (-1) * Double(vade.text!)! - Double(krediT!))!
+            taksitTutarıText.text       = formatter.stringFromNumber( round(pmt * (-1)))!
+            toplamGeriOdemeText.text    = formatter.stringFromNumber( round(pmt * (-1) * Double(vade.text!)!))!
+            faizFarkiText.text          = formatter.stringFromNumber( round(pmt * (-1) * Double(vade.text!)! - Double(krediT!)))!
 
             
             
@@ -323,9 +323,20 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         }
     }
     
+    // landscape force
+    override func shouldAutorotate() -> Bool {
+        return false
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        // landscape force
+        let value = UIInterfaceOrientation.Portrait.rawValue
+        UIDevice.currentDevice().setValue(value, forKey: "orientation")
+        
         
         // --------------------------------------------------------------------------------
         // --------------------------------------------------------------------------------
@@ -451,7 +462,6 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         if self.interstitial.isReady {
             self.interstitial.presentFromRootViewController(self)
         }
-        // Rest of game over logic goes here.
     }
     
     
@@ -460,9 +470,7 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
         // Dispose of any resources that can berecreated.
     }
     
-    override func shouldAutorotate() -> Bool {
-        return false
-    }
+
    
     
     

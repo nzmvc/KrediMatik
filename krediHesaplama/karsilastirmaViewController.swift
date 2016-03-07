@@ -1,31 +1,26 @@
 //
-//  tableView.swift
+//  karsilastirmaViewController.swift
 //  krediHesaplama
 //
-//  Created by MacBook on 10/12/15.
-//  Copyright © 2015 befree. All rights reserved.
+//  Created by MacBook on 07/03/16.
+//  Copyright © 2016 befree. All rights reserved.
 //
 
 import UIKit
 import MessageUI
-//import AppKit
 
+class karsilastirmaViewController: UIViewController,MFMailComposeViewControllerDelegate {
 
-
-var compareList = [String]()
-
-class SecondViewController: UIViewController,UITableViewDelegate,MFMailComposeViewControllerDelegate{
-    
-
+    @IBOutlet weak var webView: UIWebView!
     @IBAction func sendMail(sender: AnyObject) {
-       
+        
         if MFMailComposeViewController.canSendMail() {
             
             let messageTitle = "Kredi Karşılaştırma tablosu"
             var messageBody = "<html> <head> <meta charset=\"utf-8\"><title>Untitled Document</title></head><body><h1><strong>Karşılaştırma tablosu</strong></h1>"
             
             messageBody = messageBody + "<table border=\"1\"> <tr><th>Kredi turarı</th> <th>Vade</th> <th>Oran</th> <th>Aylık Odeme</th> <th>Toplam Odeme</th> <th>Faiz Farkı</th> </tr>"
-           
+            
             
             // karşılastırma dizisine eklenen verilet html formatında yazılıyor
             
@@ -38,10 +33,10 @@ class SecondViewController: UIViewController,UITableViewDelegate,MFMailComposeVi
                 messageBody = messageBody + "<td>" + value.componentsSeparatedByString(";")[3] + "</td>"
                 messageBody = messageBody + "<td>" + value.componentsSeparatedByString(";")[4] + "</td>"
                 messageBody = messageBody + "<td>" + value.componentsSeparatedByString(";")[5] + "</td></tr>"
-           
+                
             }
             messageBody = messageBody + "</table></body></html>"
-                
+            
             
             
             let toRecepient = ["nzm.avci@gmail.com"]
@@ -63,7 +58,7 @@ class SecondViewController: UIViewController,UITableViewDelegate,MFMailComposeVi
         
     }
     func mailComposeController(controller: MFMailComposeViewController, didFinishWithResult result: MFMailComposeResult, error: NSError?) {
-    controller.dismissViewControllerAnimated(true, completion: nil)
+        controller.dismissViewControllerAnimated(true, completion: nil)
         
         switch result.rawValue {
         case MFMailComposeResultCancelled.rawValue :
@@ -81,87 +76,65 @@ class SecondViewController: UIViewController,UITableViewDelegate,MFMailComposeVi
         }
         
     }
+
     
-    @IBOutlet weak var compareTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if (NSUserDefaults.standardUserDefaults().objectForKey("compareArr") != nil) {
             
             compareList = NSUserDefaults.standardUserDefaults().objectForKey("compareArr") as! [String]
             
+                    var messageBody = "<html> <head> <meta charset=\"utf-8\"><title></title></head><body><center><h1><strong>Karşılaştırma tablosu</strong></h1>"
+        
+        messageBody = messageBody + "<table border=\"1\"> <tr><th>Kredi turarı (TL)</th> <th>Vade</th> <th>Oran</th> <th>Aylık Odeme (TL)</th> <th>Toplam Odeme (TL)</th> <th>Faiz Farkı (TL)</th> </tr>"
+        
+        
+        // karşılastırma dizisine eklenen verilet html formatında yazılıyor
+        
+        
+        for (_,value) in compareList.enumerate(){
             
+            messageBody = messageBody + "<tr><td>" + value.componentsSeparatedByString(";")[0] + "</td>"
+            messageBody = messageBody + "<td>" + value.componentsSeparatedByString(";")[1] + "</td>"
+            messageBody = messageBody + "<td>" + value.componentsSeparatedByString(";")[2] + "</td>"
+            messageBody = messageBody + "<td>" + value.componentsSeparatedByString(";")[3] + "</td>"
+            messageBody = messageBody + "<td>" + value.componentsSeparatedByString(";")[4] + "</td>"
+            messageBody = messageBody + "<td>" + value.componentsSeparatedByString(";")[5] + "</td></tr>"
+            
+        }
+        messageBody = messageBody + "</table></center></body></html>"
             // landscape force
             let value = UIInterfaceOrientation.LandscapeLeft.rawValue
             UIDevice.currentDevice().setValue(value, forKey: "orientation")
+            webView.loadHTMLString(messageBody, baseURL: nil)
         }
-    
+        
+        
+        
+        
     }
     
     // landscape force
     override func shouldAutorotate() -> Bool {
         return false
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-   
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        //print( "-----" + String( compareList.count))
-        return compareList.count
-        
-        
-    }
-
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
     
-        let myCellToReturn = tableView.dequeueReusableCellWithIdentifier("myCell", forIndexPath: indexPath ) as! MyCustomCell
-        
-        //"120000;12;10.5;10837.79  TL;130053.52  TL;10053.52  TL;0"
-        
-        myCellToReturn.krediT.text = compareList[indexPath.row].componentsSeparatedByString(";")[0]
-        myCellToReturn.vadeL.text = compareList[indexPath.row].componentsSeparatedByString(";")[1]
-        myCellToReturn.oran.text = compareList[indexPath.row].componentsSeparatedByString(";")[2]
-        myCellToReturn.aylıkT.text = compareList[indexPath.row].componentsSeparatedByString(";")[3]
-        myCellToReturn.toplamGeriO.text = compareList[indexPath.row].componentsSeparatedByString(";")[4]
-        myCellToReturn.faizF.text = compareList[indexPath.row].componentsSeparatedByString(";")[5]
-        //myCellToReturn.kB.text = compareList[indexPath.row].componentsSeparatedByString(";")[6]
-        
-        
-        
-        return myCellToReturn
-        
-    }
-   
-    /*
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath){
-        
-        if editingStyle == UITableViewCellEditingStyle.Delete {    // tabloda yapılan edit işlemini kontrol eder
-            
-            toDoList.removeAtIndex(indexPath.row)
-            
-            NSUserDefaults.standardUserDefaults().setObject(toDoList, forKey: "toDoList")
-            
-            toDoListTableView.reloadData()      //   silme işi sonrasında tabloyu yeniden yuklemeliyiz
-            
-        }
-        
-        */
 
     /*
-    
-    override func viewDidAppear(animated: Bool) {       //, tablonu yenilikleri göstermesi için......
-        
-        compareTable.reloadData()
-        
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
-*/
-    
+    */
+
 }
-
-
-
-
