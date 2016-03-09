@@ -45,6 +45,7 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
 
     
     
+    @IBOutlet weak var menuOutlet: UIButton!
     @IBOutlet weak var addToCompareButtonOutlet: UIButton!
     @IBOutlet weak var compareButtonOutlet: UIButton!
     @IBOutlet weak var oranListe: UIPickerView!
@@ -329,8 +330,17 @@ class ViewController: UIViewController,UIPickerViewDataSource,UIPickerViewDelega
     }
     
     
+    @IBAction func menuAction(sender: AnyObject) {
+        self.revealViewController()
+        Selector("revealToggle:")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+        
+        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         
         
         // landscape force
